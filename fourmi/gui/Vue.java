@@ -21,9 +21,11 @@ public class Vue extends Pane implements ObservableGuiObject{
 		context=canvas.getGraphicsContext2D();
 		couleur_fond=Color.FLORALWHITE;
 	}
-	{//Properties et autre
+	{//Children et Properties
 		canvas.widthProperty().bind(this.widthProperty());
 		canvas.heightProperty().bind(this.heightProperty());
+		//
+		getChildren().add(canvas);
 	}
 	@Override
 	public void addGuiObject(Integer hashkey, GuiObject guiobject) {

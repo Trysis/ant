@@ -17,7 +17,7 @@ public class Main extends Application {
 			Model model=new Model();
 			new Controleur(vue,model);
 			
-			Scene scene = new Scene(vue,400,400);
+			Scene scene = new Scene(vue,1220,810);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

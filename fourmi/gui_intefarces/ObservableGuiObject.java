@@ -1,4 +1,4 @@
-package gui;
+package gui_intefarces;
 
 import gameloop.Renderer;
 

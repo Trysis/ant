@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.animation.AnimationTimer;
-import model.ObservableObject;
+import model_interfaces.ObservableObject;
 
 public class GameLoop extends AnimationTimer implements ObservableObservableObject{
 	private Renderer renderer;//Utile pour mettre a jour l'affichage

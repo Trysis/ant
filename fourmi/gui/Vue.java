@@ -3,8 +3,12 @@ package gui;
 import java.util.HashMap;
 import java.util.Map;
 
+import gui_intefarces.GuiObject;
+import gui_intefarces.ObservableGuiObject;
+import javafx.event.EventType;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
@@ -14,7 +18,7 @@ public class Vue extends Pane implements ObservableGuiObject{
 	private GraphicsContext context;
 	private HashMap<Integer,GuiObject> guiobject_list = new HashMap<>();
 	
-	//private Selec
+	private EventType<MouseEvent> mouse_event=MouseEvent.ANY;
 	
 	{//Initialisation
 		canvas=new Canvas();
@@ -24,8 +28,11 @@ public class Vue extends Pane implements ObservableGuiObject{
 	{//Children et Properties
 		canvas.widthProperty().bind(this.widthProperty());
 		canvas.heightProperty().bind(this.heightProperty());
-		//
+		
 		getChildren().add(canvas);
+	}
+	public Canvas getCanvas() {
+		return canvas;
 	}
 	@Override
 	public void addGuiObject(Integer hashkey, GuiObject guiobject) {
@@ -40,7 +47,9 @@ public class Vue extends Pane implements ObservableGuiObject{
 		context.save();
 		context.setFill(couleur_fond);
 		context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		for(Map.Entry<Integer, GuiObject> tmp: guiobject_list.entrySet())context.drawImage(tmp.getValue().getImage(), tmp.getValue().getX(), tmp.getValue().getY());
+		for(Map.Entry<Integer, GuiObject> tmp: guiobject_list.entrySet()) {
+			context.drawImage(tmp.getValue().getImage(), tmp.getValue().getX(), tmp.getValue().getY());
+		}
 		context.restore();
 	}
 

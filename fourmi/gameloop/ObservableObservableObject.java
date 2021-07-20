@@ -1,6 +1,6 @@
 package gameloop;
 
-import model.ObservableObject;
+import model_interfaces.ObservableObject;
 
 public interface ObservableObservableObject {
 	public void addObservableObject(Integer key,ObservableObject gameobject);

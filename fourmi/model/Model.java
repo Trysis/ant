@@ -1,18 +1,20 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+
+import model_interfaces.ObservableAntObject;
 
 public class Model implements ObservableAntObject{
-	private LinkedList<AntObject> antobject_list=new LinkedList<>();//LinkedList pour maintenir l'ordre d'apparition
-
+	private ArrayList<AntObject> antobject_list=new ArrayList<>();//ArrayList pour maintenir l'ordre d'apparition
+	
 	@Override
 	public void addAntObject(AntObject antobject) {
-		antobject_list.add(antobject.hashCode(), antobject);
+		antobject_list.add(antobject);
 	}
 
 	@Override
 	public void removeAntObject(AntObject antobject) {
-		antobject_list.remove(antobject.hashCode());
+		antobject_list.remove(antobject);
 	}
 	@Override
 	public void Notify(long t) {

@@ -35,8 +35,8 @@ public class Vue extends Pane implements ObservableGuiObject{
 		return canvas;
 	}
 	@Override
-	public void addGuiObject(Integer hashkey, GuiObject guiobject) {
-		guiobject_list.put(hashkey, guiobject);
+	public void addGuiObject(GuiObject guiobject) {
+		guiobject_list.put(guiobject.hashCode(), guiobject);
 	}
 	@Override
 	public void removeGuiObject(Integer hashkey) {

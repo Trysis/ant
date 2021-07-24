@@ -2,40 +2,33 @@ package model;
 
 public class Vecteur {
 	private double x,y;
-	private double magnitude=1;
+	private double x_capped,y_capped;
 	private double cap=-1;
+	private boolean capped;
 	//Constructeur
 	public Vecteur() {
 		this(0,0);
 	}
 	public Vecteur(Vecteur vecteur) {
-		this(vecteur.getX(),vecteur.getY(),vecteur.getMagnitude(),vecteur.getCap());
+		this(vecteur.getX(),vecteur.getY(),vecteur.getCap());
 	}
 	public Vecteur(double magnitude) {
 		this();
-		this.magnitude=magnitude;
 	}
 	public Vecteur(double x,double y) {
 		this.x=x;
 		this.y=y;
 	}
-	public Vecteur(double x,double y,double magnitude) {
+	public Vecteur(double x,double y,double cap) {
 		this(x,y);
-		this.magnitude=magnitude;
-	}
-	public Vecteur(double x,double y,double magnitude,double cap) {
-		this(x,y,magnitude);
 		this.cap=cap;
 	}
 	//Getter
 	public double getX() {
-		return this.x;
+		return capped ? this.x_capped:this.x;
 	}
 	public double getY() {
-		return this.y;
-	}
-	public double getMagnitude() {
-		return magnitude;
+		return capped ? this.y_capped:this.y;
 	}
 	public double getCap() {
 		return this.cap;
@@ -43,19 +36,26 @@ public class Vecteur {
 	//Setter
 	public void setX(double x) {//Set x
 		this.x=x;
+		cap();
 	}
 	public void setY(double y) {//Set y
 		this.y=y;
+		cap();
 	}
 	public void setVecteur(double x,double y) {//Set x et y
 		setX(x);
 		setY(y);
 	}
-	public void setMagnitude(double valeur) {
-		this.magnitude=Math.abs(valeur);
+	public boolean isCapped() {
+		return capped;
 	}
 	public void setCap(double valeur) {
 		cap=valeur;
+		if(cap>0)capped=true;
+		else capped=false;
+	}
+	public void removeCap() {
+		setCap(-1);
 	}
 	//Calculs numériques sur vecteur
 	//Additions sur vecteurs
@@ -98,16 +98,26 @@ public class Vecteur {
 	//Normalisation (longueur==1)
 	public Vecteur normaliser() {//Ramène le vecteur sur des normes (rayon =1)
 		double longueur=longueurVecteur();
-		double x_b=0,y_b=0;
+		double x_b=x,y_b=y;
 		if(longueur!=0) {
-			x_b=x/longueur;
-			y_b=y/longueur;
+			x_b/=longueur;
+			y_b/=longueur;
 		}
+		System.out.println(x_b);
 		return new Vecteur(x_b,y_b);
+	}
+	public void cap() {
+		if(cap<0)return;
+		Vecteur l2=normaliser();
+		double l2_lenght = longueurVecteur();
+		if(l2_lenght>cap) {
+			x_capped=l2.x*cap;
+			y_capped=l2.y*cap;
+		}
 	}
 	//Longueur 
 	public double longueurVecteur() {//Longueur absolue du vecteur
-		return Math.sqrt(getX()*getX()+getY()*getY());
+		return Math.sqrt(this.x*this.x+this.y*this.y);
 	}
 	public String toString() {
 		return "["+this.getX()+";"+this.getY()+"]";

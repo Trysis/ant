@@ -19,5 +19,6 @@ public class Model implements ObservableAntObject{
 	@Override
 	public void Notify(long t) {
 		for(AntObject tmp: antobject_list)tmp.update(t);
+		for(AntObject tmp: antobject_list)tmp.updateview();
 	}
 }

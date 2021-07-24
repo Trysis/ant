@@ -45,8 +45,8 @@ public class GameLoop extends AnimationTimer implements ObservableObservableObje
 	}
 	//Interface ObservableObject - Methodes 
 	@Override
-	public void addObservableObject(Integer key,ObservableObject observableAntobject) {
-		observableObject_list.put(key,observableAntobject);
+	public void addObservableObject(ObservableObject observableAntobject) {
+		observableObject_list.put(observableAntobject.hashCode(),observableAntobject);
 		changed=true;
 	}
 	@Override
